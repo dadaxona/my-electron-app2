@@ -53,16 +53,33 @@ async function getDeviceRespon() {
     }
 }
 
+
+  function secondsToTime (totalSeconds) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const hh = String(hours).padStart(2, "0");
+    const mm = String(minutes).padStart(2, "0");
+    return `${hh}:${mm}`;
+  }
+
 async function getuserTime() {
     const countres = 136;
     const data = await window.api.setTimeApi({ time: 15 });
     if (data && data.statusCode === 300) {
         const token = sessionStorage.getItem("token");
-        const res = await window.api.setusername({ token });
+        const res = await window.api.setusername({ token });        
         if (res && res.statusCode === 200 && res.key && Number(res.key.length) === countres) {
             $('#derfgtyhujiklohads').modal('hide')
         } else {
             $('#derfgtyhujiklohads').modal('show')
+        }
+    } else {
+        if (data && data.statusCode === 200) {
+            if (data?.items?.count > data?.items?.count2) {
+                const all = data?.items?.count - data?.items?.count2;
+                const result = secondsToTime(all || 0)
+                $('.tim').text("Demo tugash vaqti: " + result)
+            }
         }
     }
 }
@@ -208,15 +225,8 @@ async function dash() {
 
     async function ver() {
         const token = sessionStorage.getItem("token");
-        // if (!token) {
-        //     $('#loginModal').modal('show')
-        // } else {
-        //     $('#loginModal').modal('hide')
-        // }
         const res = await window.api.verifyToken({'token': token});
-        console.log(res);
         if (!res || res.statusCode !== 200) {
-            
             $('#loginModal').modal('show')
         } else {
             $('#loginModal').modal('hide')
