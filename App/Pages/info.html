@@ -1,166 +1,536 @@
   <style>
-    :root{
-      --brand:#0d6efd;
-      --muted:#6c757d;
+    :root {
+      --brand: #667eea;
+      --brand-secondary: #764ba2;
+      --muted: #6c757d;
+      --success: #28a745;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+      --border-radius: 20px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    body{
-      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 40%);
-      color: #212529;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+
+    * {
+      box-sizing: border-box;
     }
-    .hero {
-      background: linear-gradient(90deg, rgba(13,110,253,0.06), rgba(13,110,253,0.02));
-      border-radius: 12px;
-      padding: 36px;
+
+    body {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: var(--dark);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
     }
-    .contact-card {
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(20,30,50,0.06);
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
     }
-    .social-btn {
-      width:44px;height:44px;border-radius:10px;
-      display:inline-flex;align-items:center;justify-content:center;
-      background:#fff;border:1px solid #e9eef5;
-      box-shadow: 0 4px 12px rgba(16,24,40,0.04);
+
+    /* Header Styles */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    footer {
-      padding: 36px 0;
-      color: var(--muted);
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
+
     .logo-mark {
-      width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#6610f2);
-      display:inline-flex;align-items:center;justify-content:center;color:#fff;font-weight:700;
-      box-shadow: 0 6px 18px rgba(13,110,253,0.15);
+      width: 60px;
+      height: 60px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 1.5rem;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+      transition: var(--transition);
     }
-    @media (max-width:576px){
-      .hero { padding: 20px; }
+
+    .logo-mark:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .company-info h4 {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--brand);
+    }
+
+    .company-info small {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+    }
+
+    .nav-links a:hover {
+      color: var(--brand);
+      background: rgba(102, 126, 234, 0.1);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.05));
+      border-radius: var(--border-radius);
+      padding: 3rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--brand), var(--brand-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .vision-mission {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .vision-card, .mission-card {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 1.5rem;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .vision-card:hover, .mission-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .vision-card h6, .mission-card h6 {
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .vision-card p, .mission-card p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: var(--transition);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .contact-card h5 {
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+    }
+
+    .contact-info {
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .contact-info .text-muted {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .social-links {
+      margin-top: 1.5rem;
+    }
+
+    .social-links h6 {
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 1rem;
+    }
+
+    .social-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(102, 126, 234, 0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin-right: 1rem;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px) scale(1.1);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--brand);
+    }
+
+    /* Map and Team Section */
+    .map-team-section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .map-card, .team-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .map-card h6, .team-card h6 {
+      font-weight: 700;
+      color: var(--brand);
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 320px;
+      border-radius: 15px;
+      overflow: hidden;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      border: 2px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .team-member {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: rgba(102, 126, 234, 0.05);
+      border-radius: 12px;
+      transition: var(--transition);
+    }
+
+    .team-member:hover {
+      background: rgba(102, 126, 234, 0.1);
+      transform: translateX(5px);
+    }
+
+    .team-member img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-member-info strong {
+      color: var(--dark);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+
+    .team-member-info small {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    footer .small {
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--brand);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    footer a:hover {
+      color: var(--brand-secondary);
+      text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+      
+      .hero {
+        padding: 2rem;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .map-team-section {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .vision-mission {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Animation Classes */
+    .fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .slide-in-left {
+      animation: slideInLeft 0.6s ease-out;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .slide-in-right {
+      animation: slideInRight 0.6s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
   </style>
 
-  <div class="container py-5">
+  <div class="container fade-in">
     <!-- Header -->
-    <header class="d-flex align-items-center justify-content-between mb-4">
-      <div class="d-flex align-items-center gap-3">
+    <header class="slide-in-left">
+      <div class="logo-section">
         <div class="logo-mark">ID</div>
-        <div>
-          <h4 class="mb-0">ID Group</h4>
-          <small class="text-muted">Slogan yoki qisqa tavsif</small>
+        <div class="company-info">
+          <h4>ID Group</h4>
+          <small>Innovatsion IT yechimlar</small>
         </div>
       </div>
-      <nav>
-        <a href="#Asosiy" class="text-decoration-none text-muted me-3">Asosiy</a>
-        <a href="#Kontakt" class="text-decoration-none text-muted me-3">Kontakt</a>
-        <a href="#Manzil" class="text-decoration-none text-muted me-3">Manzil</a>
+      <nav class="nav-links">
+        <a href="#Asosiy">🏠 Asosiy</a>
+        <a href="#Kontakt">📞 Kontakt</a>
+        <a href="#Manzil">📍 Manzil</a>
       </nav>
     </header>
 
-    <!-- Hero -->
-    <section class="hero mb-5" id="Asosiy">
+    <!-- Hero Section -->
+    <section class="hero slide-in-right" id="Asosiy">
       <div class="row align-items-center">
         <div class="col-lg-7">
-          <h1 class="display-6 fw-bold">Biz haqimizda</h1>
-          <p class="lead text-muted mb-4">
-            <!-- EDIT HERE: kompaniya haqida qisqacha ma'lumot -->
-            Biz — zamonaviy yechimlar yaratadigan, mijozlarga halol va tezkor xizmat ko‘rsatadigan IT va xavfsizlik bo‘yicha mutaxassislar jamoamiz. 2018-yildan beri katta, kichik va o‘rta bizneslarga, idoralarga yechimlar taqdim etamiz.
+          <h1>Biz haqimizda</h1>
+          <p class="lead">
+            Biz — zamonaviy yechimlar yaratadigan, mijozlarga halol va tezkor xizmat ko'rsatadigan IT va xavfsizlik bo'yicha mutaxassislar jamoamiz. 2018-yildan beri katta, kichik va o'rta bizneslarga, idoralarga yechimlar taqdim etamiz.
           </p>
-          <div class="d-flex gap-3 flex-wrap">
-            <div class="p-3 bg-white contact-card">
-              <h6 class="mb-1">Vizyon</h6>
-              <p class="small text-muted mb-0">Innovatsion va ishonchli tizimlar yaratish.</p>
+          <div class="vision-mission">
+            <div class="vision-card">
+              <h6>🎯 Vizyon</h6>
+              <p>Innovatsion va ishonchli tizimlar yaratish.</p>
             </div>
-            <div class="p-3 bg-white contact-card">
-              <h6 class="mb-1">Missiya</h6>
-              <p class="small text-muted mb-0">Mijozlar biznesini raqamli xavfsizlik orqali himoya qilish.</p>
+            <div class="mission-card">
+              <h6>🚀 Missiya</h6>
+              <p>Mijozlar biznesini raqamli xavfsizlik orqali himoya qilish.</p>
             </div>
           </div>
         </div>
 
         <div class="col-lg-5 text-lg-end mt-4 mt-lg-0">
-          <img src="./d.jpg"
-            alt="office" class="img-fluid rounded-3 shadow-sm">
+          <img src="./d.jpg" alt="office" class="img-fluid rounded-3 shadow-sm">
         </div>
       </div>
     </section>
 
-    <!-- Contact + Form -->
-    <div class="row g-4" id="Kontakt">
-      <div class="col-lg-5">
-        <div class="p-4 bg-white contact-card h-100">
-          <h5 class="mb-3">Aloqa ma'lumotlari</h5>
+    <!-- Contact Section -->
+    <div class="contact-section" id="Kontakt">
+      <div class="contact-card slide-in-left">
+        <h5>📞 Aloqa ma'lumotlari</h5>
 
-          <p class="mb-2"><strong>Manzil</strong></p>
-          <p class="text-muted small mb-3">HJ4M+4WF, Urganch, Xorazm Viloyati, Узбекистан</p>
+        <div class="contact-info">
+          <p><strong>📍 Manzil</strong></p>
+          <p class="text-muted small">HJ4M+4WF, Urganch, Xorazm Viloyati, Узбекистан</p>
 
-          <p class="mb-2"><strong>Telefon</strong></p>
-          <p class="text-muted small mb-3">+998 97 221 58 58</p>
-          <p class="text-muted small mb-3">+998 77 360 62 20</p>
+          <p><strong>📱 Telefon</strong></p>
+          <p class="text-muted small">+998 97 221 58 58</p>
+          <p class="text-muted small">+998 77 360 62 20</p>
 
-          <p class="mb-2"><strong>Email</strong></p>
-          <p class="text-muted small mb-3">idgroup@gmail.com</p>
+          <p><strong>✉️ Email</strong></p>
+          <p class="text-muted small">idgroup@gmail.com</p>
 
-          <p class="mb-2"><strong>Ish vaqti</strong></p>
-          <p class="text-muted small mb-3">Dushanba — Shanba: 09:00 — 18:00</p>
+          <p><strong>⏰ Ish vaqti</strong></p>
+          <p class="text-muted small">Dushanba — Shanba: 09:00 — 18:00</p>
+        </div>
 
-          <div class="mt-3">
-            <h6 class="mb-2">Ijtimoiy tarmoqlar</h6>
-            <div class="d-flex gap-2">
-              <a class="social-btn" href="#" title="Facebook" aria-label="Facebook">
-                <!-- FB SVG -->
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M22 12.07C22 6.48 17.52 2 11.93 2 6.33 2 2 6.48 2 12.07c0 5.02 3.66 9.18 8.44 9.95v-7.05H8.9v-2.9h1.54V9.41c0-1.52.9-2.37 2.28-2.37.66 0 1.34.12 1.34.12v1.48h-.76c-.75 0-.98.47-.98.95v1.15h1.66l-.27 2.9h-1.39v7.05C18.34 21.25 22 17.09 22 12.07z" fill="#1877F2"/>
-                </svg>
-              </a>
+        <div class="social-links">
+          <h6>🌐 Ijtimoiy tarmoqlar</h6>
+          <div class="d-flex gap-2">
+            <a class="social-btn" href="#" title="Facebook" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 12.07C22 6.48 17.52 2 11.93 2 6.33 2 2 6.48 2 12.07c0 5.02 3.66 9.18 8.44 9.95v-7.05H8.9v-2.9h1.54V9.41c0-1.52.9-2.37 2.28-2.37.66 0 1.34.12 1.34.12v1.48h-.76c-.75 0-.98.47-.98.95v1.15h1.66l-.27 2.9h-1.39v7.05C18.34 21.25 22 17.09 22 12.07z" fill="#1877F2"/>
+              </svg>
+            </a>
 
-              <a class="social-btn" href="#" title="LinkedIn" aria-label="LinkedIn">
-                <svg width="18" height="18" viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.6 4.11 5.5 3 5.5S1 4.6 1 3.5 1.88 1.5 3 1.5 4.98 2.4 4.98 3.5zM.5 8.98h4.98V23H.5V8.98zM8.5 8.98h4.78v1.94h.07c.67-1.27 2.3-2.61 4.73-2.61 5.06 0 6 3.34 6 7.68V23H18.9v-7.22c0-1.72 0-3.93-2.4-3.93-2.4 0-2.77 1.88-2.77 3.81V23H8.5V8.98z" fill="#0A66C2"/></svg>
-              </a>
+            <a class="social-btn" href="#" title="LinkedIn" aria-label="LinkedIn">
+              <svg width="20" height="20" viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 4.6 4.11 5.5 3 5.5S1 4.6 1 3.5 1.88 1.5 3 1.5 4.98 2.4 4.98 3.5zM.5 8.98h4.98V23H.5V8.98zM8.5 8.98h4.78v1.94h.07c.67-1.27 2.3-2.61 4.73-2.61 5.06 0 6 3.34 6 7.68V23H18.9v-7.22c0-1.72 0-3.93-2.4-3.93-2.4 0-2.77 1.88-2.77 3.81V23H8.5V8.98z" fill="#0A66C2"/></svg>
+            </a>
 
-              <a class="social-btn" href="#" title="Instagram" aria-label="Instagram">
-                <svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.8a4.2 4.2 0 1 0 .001 8.401A4.2 4.2 0 0 0 12 7.8zm6.5-.8a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z" fill="#E1306C"/></svg>
-              </a>
-            </div>
+            <a class="social-btn" href="#" title="Instagram" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.8a4.2 4.2 0 1 0 .001 8.401A4.2 4.2 0 0 0 12 7.8zm6.5-.8a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z" fill="#E1306C"/></svg>
+            </a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Map + Team -->
-    <div class="row mt-5 g-4" id="Manzil">
-      <div class="col-lg-8">
-        <div class="p-4 bg-white contact-card">
-          <h6 class="mb-3">Manzil (Xarita)</h6>
-          <div style="width:100%;height:320px;border-radius:10px;overflow:hidden;background:#eef2ff;display:flex;align-items:center;justify-content:center;color:var(--muted)">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2985.643804135744!2d60.634797!3d41.555309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41dfcf1730fda8d5%3A0x309ffe7ff70def12!2sIDGroupUZ!5e0!3m2!1sru!2s!4v1759314341419!5m2!1sru!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </div>
+    <!-- Map and Team Section -->
+    <div class="map-team-section" id="Manzil">
+      <div class="map-card slide-in-left">
+        <h6>📍 Manzil (Xarita)</h6>
+        <div class="map-container">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2985.643804135744!2d60.634797!3d41.555309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41dfcf1730fda8d5%3A0x309ffe7ff70def12!2sIDGroupUZ!5e0!3m2!1sru!2s!4v1759314341419!5m2!1sru!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
 
-      <div class="col-lg-4">
-        <div class="p-4 bg-white contact-card">
-          <h6 class="mb-3">Jamoamiz</h6>
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <img src="https://avatars.dicebear.com/api/initials/AK.svg" alt="member" width="56" height="56" class="rounded-circle">
-            <div>
-              <strong>Dilmurod Ibragimov</strong><br>
-              <small class="text-muted">Asoschi</small>
-            </div>
+      <div class="team-card slide-in-right">
+        <h6>👥 Jamoamiz</h6>
+        <div class="team-member">
+          <img src="https://avatars.dicebear.com/api/initials/AK.svg" alt="member">
+          <div class="team-member-info">
+            <strong>Dilmurod Ibragimov</strong>
+            <small>Asoschi</small>
           </div>
-          <div class="d-flex align-items-center gap-3">
-            <img src="https://avatars.dicebear.com/api/initials/SJ.svg" alt="member" width="56" height="56" class="rounded-circle">
-            <div>
-              <strong>Dadaxon Abdullaev</strong><br>
-              <small class="text-muted">Texnik qo'llab-quvvatlash</small>
-            </div>
+        </div>
+        <div class="team-member">
+          <img src="https://avatars.dicebear.com/api/initials/SJ.svg" alt="member">
+          <div class="team-member-info">
+            <strong>Dadaxon Abdullaev</strong>
+            <small>Texnik qo'llab-quvvatlash</small>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Footer -->
-    <footer class="mt-5 text-center">
+    <footer class="fade-in">
       <div class="small">
         © <span id="year"></span> ID Group. Barcha huquqlar himoyalangan. &nbsp;•&nbsp;
-        <a href="#" class="text-decoration-none">Maxfiylik siyosati</a>
+        <a href="#">Maxfiylik siyosati</a>
       </div>
     </footer>
   </div>

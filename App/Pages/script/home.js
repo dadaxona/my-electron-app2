@@ -97,7 +97,7 @@ $(document).on('click', '.openContact', async function () {
         <div class="modal-dialog w-100">
             <div class="modal-content border-0 shadow-lg rounded-4">
             <div class="modal-header border-0">
-                <h5 class="modal-title w-100 text-center fw-bold text-primary">
+                <h5 class="modal-title w-100 text-center fw-bold text-white">
                 📞 Aloqa ma'lumotlari
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Yopish"></button>
@@ -724,7 +724,7 @@ async function users() {
             const blob = new Blob([buffer], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
             const link = document.createElement("a");
             link.href = URL.createObjectURL(blob);
-            link.download = "Xodimlar.xlsx";
+            link.download = "Royxat.xlsx";
             link.click();
         } else {
             console.log(result);

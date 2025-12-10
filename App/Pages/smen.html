@@ -1,35 +1,270 @@
-<div class="container">
-<div class="row g-2 mb-3">
-    <input type="hidden" id="idS">
-    <div class="col">
-        <select id="smen" class="form-control">
-            <option value="">--Tanlang--</option>
-            <option value="Kun">Kun</option>
-            <option value="Tun">Tun</option>
-            <option value="To'liq">To'liq</option>
-        </select>
-    </div>
-    <div class="col">
-        <input type="time" id="kirish" class="form-control">
-    </div>
-    <div class="col">
-        <input type="time" id="chiqish" class="form-control">
-    </div>
-    <div class="col-auto">
-        <button class="btn btn-primary" id="addSmen">Saqlash</button>
-    </div>
-</div>
+<style>
+  .smen-management-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  
+  .smen-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 2rem;
+    color: white;
+  }
+  
+  .smen-header h4 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .smen-header h4::before {
+    content: '⏰';
+    margin-right: 0.75rem;
+    font-size: 1.8rem;
+  }
+  
+  .form-section {
+    padding: 2rem;
+    background: #f8f9fa;
+  }
+  
+  .form-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #495057;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .form-title::before {
+    content: '➕';
+    margin-right: 0.75rem;
+    font-size: 1.5rem;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+  }
+  
+  .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    transform: translateY(-1px);
+  }
+  
+  .form-control select {
+    background: white;
+    cursor: pointer;
+  }
+  
+  .submit-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 0.75rem 2rem;
+    color: white;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-self: start;
+  }
+  
+  .submit-btn:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+  }
+  
+  .data-table-section {
+    padding: 2rem;
+  }
+  
+  .data-table {
+    margin: 0;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .data-table thead th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 1rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .data-table tbody td {
+    border: none;
+    padding: 1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f1f3f4;
+  }
+  
+  .data-table tbody tr:hover {
+    background: #f8f9fa;
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+  }
+  
+  .data-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .action-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem;
+    margin: 0 0.25rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .action-btn.edit {
+    background: linear-gradient(135deg, #ffc107, #ff8c00);
+    color: white;
+  }
+  
+  .action-btn.delete {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+  }
+  
+  .action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .smen-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .smen-badge.kun {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+  }
+  
+  .smen-badge.tun {
+    background: linear-gradient(135deg, #6f42c1, #e83e8c);
+    color: white;
+  }
+  
+  .smen-badge.to'liq {
+    background: linear-gradient(135deg, #fd7e14, #ffc107);
+    color: white;
+  }
+  
+  .time-display {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: #495057;
+    background: #f8f9fa;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    display: inline-block;
+  }
+  
+  @media (max-width: 768px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
 
-<h4>Smenlar Jadvali</h4>
-<table class="table table-bordered table-striped" id="userTables">
-    <thead>
-    <tr>
-        <th>Smen</th>
-        <th>Kirish</th>
-        <th>Chiqish</th>
-        <th>Amallar</th>
-    </tr>
-    </thead>
-    <tbody id="tbodyS"></tbody>
-</table>
+<div class="smen-management-container fade-in">
+    <div class="smen-header">
+        <h4>Smen Boshqaruvi</h4>
+    </div>
+    
+    <div class="form-section">
+        <h5 class="form-title">Yangi Smen Qo'shish</h5>
+        <form id="smenForm">
+            <input type="hidden" id="idS">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="smen" class="form-label">⏰ Smen Turi</label>
+                    <select id="smen" class="form-control">
+                        <option value="">--Tanlang--</option>
+                        <option value="Kun">☀️ Kun</option>
+                        <option value="Tun">🌙 Tun</option>
+                        <option value="To'liq">🔄 To'liq</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="kirish" class="form-label">🕐 Kirish Vaqti</label>
+                    <input type="time" id="kirish" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="chiqish" class="form-label">🕕 Chiqish Vaqti</label>
+                    <input type="time" id="chiqish" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="submit-btn" id="addSmen">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                        Saqlash
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div class="data-table-section">
+        <h5 class="form-title">Smenlar Jadvali</h5>
+        <div class="table-responsive">
+            <table class="table data-table" id="userTables">
+                <thead>
+                    <tr>
+                        <th>⏰ Smen</th>
+                        <th>🕐 Kirish</th>
+                        <th>🕕 Chiqish</th>
+                        <th>🔧 Amallar</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyS"></tbody>
+            </table>
+        </div>
+    </div>
 </div>
